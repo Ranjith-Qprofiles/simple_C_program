@@ -1,7 +1,4 @@
 This file is used to test the Web Hook
-commit changes made
-cdsnvlkds
-ndlskv
-];nvsl;dkv
+and it should trigger automatically in jenkins
 
 
