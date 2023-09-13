@@ -1,0 +1,37 @@
+pipeline{
+	agent any
+	// tools{
+	// 	maven "test-maven"
+	// }
+      stages{
+           stage('Checkout'){
+               steps{
+		 echo 'cloning..'
+                 git 'https://github.com/Ranjith-Qprofiles/Jenkins-Backup.git'
+              }
+          }
+          stage('Compile'){
+              steps{
+                  echo 'compiling..'
+                  sh 'mvn compile'
+	      }
+          }
+          stage('CodeReview'){
+              steps{
+		  echo 'codeReview'
+                  sh 'mvn pmd:pmd'
+		  recordIssues(tools: [pmdParser()])
+              }
+          }
+           stage('UnitTest'){
+              steps{
+                  sh 'mvn test'
+              }
+          }
+          stage('Package'){	  
+              steps{
+                  sh 'mvn package'
+              }
+          }
+      }
+}
